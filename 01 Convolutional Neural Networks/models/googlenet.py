@@ -11,7 +11,7 @@ class Inception(nn.Module):
         super(Inception, self).__init__()
         # 1x1 conv branch
         self.b1 = nn.Sequential(
-            nn.Conv2d(in_planes, n1x1, kernel_size=1),
+            nn.Conv2d(in_planes, n1x1, kernel_size = 1),
             nn.BatchNorm2d(n1x1),
             nn.ReLU(True),
         )
@@ -52,7 +52,7 @@ class Inception(nn.Module):
         y2 = self.b2(x)
         y3 = self.b3(x)
         y4 = self.b4(x)
-        return torch.cat([y1,y2,y3,y4], 1)
+        return torch.cat([y1, y2, y3, y4], 1)
 
 
 class GoogLeNet(nn.Module):
@@ -74,7 +74,6 @@ class GoogLeNet(nn.Module):
         self.c4 = Inception(512, 128, 128, 256, 24,  64,  64)
         self.d4 = Inception(512, 112, 144, 288, 32,  64,  64)
         self.e4 = Inception(528, 256, 160, 320, 32, 128, 128)
-
         self.a5 = Inception(832, 256, 160, 320, 32, 128, 128)
         self.b5 = Inception(832, 384, 192, 384, 48, 128, 128)
 
