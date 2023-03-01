@@ -4,7 +4,7 @@ Clinical Epidemiology and Biostatistics, Faculty of Medicine - Ramathibodi Hospi
 Mahidol University
 
 RADI605 Modern Machine Learrning
-Assignment for Random Forests:
+Assignment for Gradient Boosting & XGBoost:
 
 ├── RADI605 ROMEN Gradient Boosting & XGBoost
 │   ├── data
