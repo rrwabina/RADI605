@@ -15,4 +15,4 @@ Assignment for Expectation Maximization:
 │	  ├── RADI605 Expectation Maximization Assignment.ipynb
 
 You may also access the assignment through this GitHub Link:
-https://github.com/rrwabina/RADI608/tree/main/Submitted
+https://github.com/rrwabina/RADI605/tree/main/00%20Assignment
