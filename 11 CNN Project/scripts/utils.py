@@ -29,6 +29,12 @@ def count_classes_in_loader(loader):
     for i in range(len(loader.dataset.classes)):
         print(f'Class {loader.dataset.classes[i]}: {class_counts[i]}')
 
+def count_parameters(model):
+    params = [p.numel() for p in model.parameters() if p.requires_grad]
+    for item in params:
+        print(f'{item:>6}')
+    print(f'______\n{sum(params):>6}')
+
 def scrap_train():
     model_vgg19 = torchvision.models.vgg19(weights = False).to(device)
     learning_rate = 1e-2
