@@ -74,3 +74,12 @@ def scrap_train():
             val_losses.append(val_loss / len(valid_loader))
             print('Epoch %2d | Validation Loss: %.5f' % (epoch + 1, val_loss / len(valid_loader)))
 
+# train_classes = [label for _, label in train_dataset]
+# class_count = Counter(train_classes)
+# class_weights = torch.Tensor([len(train_classes)/c for c in pd.Series(class_count).sort_index().values])
+# class_samples = [0] * len(class_weights)
+
+# for _, label in train_dataset:
+#     class_samples[label] += 1    
+# weights = [class_weights[label] / class_samples[label] for _, label in train_dataset]
+
