@@ -83,3 +83,20 @@ def scrap_train():
 #     class_samples[label] += 1    
 # weights = [class_weights[label] / class_samples[label] for _, label in train_dataset]
 
+
+
+# train_classes = [label for _,   label in train_dataset]
+# train_index_0 = [idx   for idx, label in enumerate(train_classes) if label == 0]
+# train_index_1 = [idx   for idx, label in enumerate(train_classes) if label == 1]
+# weights = torch.zeros(len(train_index_0) + len(train_index_1))
+# weights[train_index_0] = 1.0 / len(train_index_0)
+# weights[train_index_1] = 1.0 / len(train_index_1)
+# train_sampler = WeightedRandomSampler(weights = weights, num_samples = len(weights), replacement = True)
+
+# valid_classes = [label for _,   label in valid_dataset]
+# valid_index_0 = [idx   for idx, label in enumerate(valid_classes) if label == 0]
+# valid_index_1 = [idx   for idx, label in enumerate(valid_classes) if label == 1]
+# valid_weights = torch.zeros(len(valid_index_0) + len(valid_index_1))
+# valid_weights[valid_index_0] = 1.0 / len(valid_index_0)
+# valid_weights[valid_index_1] = 1.0 / len(valid_index_1)
+# valid_sampler = WeightedRandomSampler(weights = valid_weights, num_samples = len(valid_weights), replacement = True)

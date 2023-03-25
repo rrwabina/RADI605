@@ -130,3 +130,100 @@ def GET_NODULEDATASET():
     valid_dataset = Subset(dataset, valid_indices)
     test_dataset  = Subset(dataset, test_indices)
     return train_dataset, valid_dataset, test_dataset
+
+
+# class NoduleDataset(torch.utils.data.Dataset):
+#     def __init__(self, data_dir):
+#         self.data_dir = data_dir        
+#         self.transform = transforms.Compose([
+#             transforms.Resize((50, 50)),
+#             transforms.RandomCrop(32, padding = 2),
+#             transforms.RandomRotation(90),
+#             transforms.CenterCrop(40),
+#             transforms.ToTensor(), 
+#             transforms.Normalize(mean = [0.485, 0.456, 0.406],
+#                                  std  = [0.229, 0.224, 0.225])])
+        
+#         self.images_dir = data_dir / 'images'
+#         self.labels_dir = data_dir / 'labels'
+
+#         self.train_images_dir = self.images_dir 
+#         self.val_images_dir   = self.images_dir  
+#         self.test_images_dir  = self.images_dir  
+
+#         self.train_labels_file = self.labels_dir  / 'trainlabels.txt'
+#         self.val_labels_file   = self.labels_dir  / 'vallabels.txt'
+#         self.test_labels_file  = self.labels_dir  / 'testlabels.txt'
+
+#         self.train_data = self._load_data(self.train_images_dir, self.train_labels_file)
+#         self.val_data   = self._load_data(self.val_images_dir, self.val_labels_file)
+#         self.test_data  = self._load_data(self.test_images_dir, self.test_labels_file)
+
+#     def __getitem__(self, index):
+#         if index < len(self.train_data):
+#             images_dir = self.train_images_dir
+#             data = self.train_data
+#         elif index < len(self.train_data) + len(self.val_data):
+#             images_dir = self.val_images_dir
+#             data = self.val_data
+#             index -= len(self.train_data)
+#         else:
+#             images_dir = self.test_images_dir
+#             data = self.test_data
+#             index -= (len(self.train_data) + len(self.val_data))
+
+#         img_path = images_dir / data[index][0]
+#         with open(img_path, 'rb') as f:
+#             image = Image.open(f).convert('RGB')
+
+#         label = data[index][1]
+#         return self.transform(image), label
+
+#     def __len__(self):
+#         return len(self.train_data) + len(self.val_data) + len(self.test_data)
+
+#     def _load_data(self, images_dir, labels_file):
+#         with open(labels_file, 'r') as f:
+#             lines = f.readlines()
+
+#         data = []
+#         for line in lines[1:]:
+#             filename, label = line.strip().split()
+#             filename = filename 
+#             label = int(label)
+#             data.append((filename, label))
+#         return data
+
+#     def get_datasets(self):
+#         train_dataset = Subset(self, range(len(self.train_data)))
+#         test_dataset  = Subset(self, range(len(self.train_data),  len(self.train_data) + len(self.test_data)))
+#         valid_dataset = Subset(self, range(len(self.train_data) + len(self.test_data),   len(self)))
+#         return train_dataset, test_dataset, valid_dataset
+
+# def GET_NODULEDATASET():
+#     train_indices = list(range(0, len(dataset.train_data)))
+#     valid_indices = list(range(len(dataset.train_data),  len(dataset.train_data) + len(dataset.val_data)))
+#     test_indices  = list(range(len(dataset.train_data) + len(dataset.val_data), len(dataset)))
+
+#     train_dataset = Subset(dataset, train_indices)
+#     valid_dataset = Subset(dataset, valid_indices)
+#     test_dataset  = Subset(dataset, test_indices)
+#     return train_dataset, valid_dataset, test_dataset
+
+# data_dir = Path('D:/nodule/data/')
+# dataset  = NoduleDataset(data_dir)
+# train_dataset, valid_dataset, test_dataset = GET_NODULEDATASET()
+
+# train_classes = [label for _, label in train_dataset]
+# class_count = Counter(train_classes)
+# class_weights = torch.Tensor([len(train_classes)/c for c in pd.Series(class_count).sort_index().values])
+# class_samples = [0] * len(class_weights)
+
+# for _, label in train_dataset:
+#     class_samples[label] += 1
+# weights = [class_weights[label] / class_samples[label] for _, label in train_dataset]
+# sampler = WeightedRandomSampler(weights = weights, num_samples = len(weights), replacement = True)
+
+# train_loader  = DataLoader(train_dataset, batch_size = 32, sampler = sampler)
+# valid_loader  = DataLoader(valid_dataset, batch_size = 32, shuffle = True )
+# test_loader   = DataLoader(test_dataset,  batch_size = 32, shuffle = False)
